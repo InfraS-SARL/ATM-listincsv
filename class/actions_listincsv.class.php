@@ -46,20 +46,24 @@ class ActionsListInCSV extends \listincsv\RetroCompatCommonHookActions
 
 	/**
 	 * Constructor
+	 *
+	 * @return void
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 	}
 
 	/**
 	 * doActions
 	 *
-	 * @param array()         $parameters     Hook metadatas (context, etc...)
-	 * @param CommonObject    &$object The object to process (an invoice if you are in invoice module, a propale in propale's module, etc...)
-	 * @param string          &$action Current action (if set). Generally create or edit or null
-	 * @param HookManager $hookmanager Hook manager propagated to allow calling another hook
+	 * @param array           $parameters     Hook metadatas (context, etc...)
+	 * @param CommonObject    $object         The object to process (an invoice if you are in invoice module, a propale in propale's module, etc...)
+	 * @param string          $action         Current action (if set). Generally create or edit or null
+	 * @param HookManager     $hookmanager    Hook manager propagated to allow calling another hook
 	 * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
 	 */
-	function doActions($parameters, &$object, &$action, $hookmanager) {
+	public function doActions($parameters, &$object, &$action, $hookmanager)
+	{
 
 		global $db, $user;
 
@@ -71,13 +75,14 @@ class ActionsListInCSV extends \listincsv\RetroCompatCommonHookActions
 	/**
 	 * printCommonFooter
 	 *
-	 * @param array()         $parameters     Hook metadatas (context, etc...)
-	 * @param CommonObject    &$object The object to process (an invoice if you are in invoice module, a propale in propale's module, etc...)
-	 * @param string          &$action Current action (if set). Generally create or edit or null
-	 * @param HookManager $hookmanager Hook manager propagated to allow calling another hook
+	 * @param array           $parameters     Hook metadatas (context, etc...)
+	 * @param CommonObject    $object         The object to process (an invoice if you are in invoice module, a propale in propale's module, etc...)
+	 * @param string          $action         Current action (if set). Generally create or edit or null
+	 * @param HookManager     $hookmanager    Hook manager propagated to allow calling another hook
 	 * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
 	 */
-	function printCommonFooter($parameters, &$object, &$action, $hookmanager) {
+	public function printCommonFooter($parameters, &$object, &$action, $hookmanager)
+	{
 		$TContext = explode(':', $parameters['context']);
 		$context_list = preg_grep('/(.*list$)/i', $TContext);
 
@@ -111,12 +116,11 @@ class ActionsListInCSV extends \listincsv\RetroCompatCommonHookActions
 			setEventMessages($hookmanager->error, $hookmanager->errors, 'errors');
 		}
 
-		if (! empty($context_list)) {
+		if (!empty($context_list)) {
 			global $langs, $user, $conf;
 			$langs->load('listincsv@listincsv');
 
-			if (! empty($user->hasRight('listincsv', 'export'))) {
-
+			if (!empty($user->hasRight('listincsv', 'export'))) {
 				require_once __DIR__ . './../lib/listincsv.lib.php';
 
 				$pathtojs = dol_buildpath('/listincsv/js/listincsv.js.php', 1);
@@ -124,7 +128,8 @@ class ActionsListInCSV extends \listincsv\RetroCompatCommonHookActions
 				$download = getListInCSVDownloadLink();
 
 				$socid = GETPOST('socid');
-				if (empty($socid)) $socid = 0;
+				if (empty($socid))
+					$socid = 0;
 
 				$varsForJs = array(
 					'downloadButton' => $download,
@@ -134,8 +139,8 @@ class ActionsListInCSV extends \listincsv\RetroCompatCommonHookActions
 						'FileGenerationInProgress' => $langs->trans('FileGenerationInProgress')
 					),
 					'conf' => array(
-						'LISTINCSV_DONT_REMOVE_TOTAL' => ! empty(getDolGlobalInt('LISTINCSV_DONT_REMOVE_TOTAL')),
-						'LISTINCSV_DELETESPACEFROMNUMBER' => ! empty(getDolGlobalInt('LISTINCSV_DELETESPACEFROMNUMBER'))
+						'LISTINCSV_DONT_REMOVE_TOTAL' => !empty(getDolGlobalInt('LISTINCSV_DONT_REMOVE_TOTAL')),
+						'LISTINCSV_DELETESPACEFROMNUMBER' => !empty(getDolGlobalInt('LISTINCSV_DELETESPACEFROMNUMBER'))
 					),
 				);
 				// Inclusion d'un JS qui va permettre de télécharger la liste
@@ -208,17 +213,17 @@ class ActionsListInCSV extends \listincsv\RetroCompatCommonHookActions
 										$table.find('tr.liste_titre_filter').remove(); // >= 6.0
 										$table.find('tr:has(td.liste_titre)').remove(); // < 6.0
 
-                                        // Suppression de la dernière colonne qui contient seulement les loupes des filtres
+										// Suppression de la dernière colonne qui contient seulement les loupes des filtres
 										<?php
 										if (!getDolGlobalString('MAIN_CHECKBOX_LEFT_COLUMN')) { ?>
-											$table.find('th:last-child, td:last-child').each(function(index) {
+											$table.find('th:last-child, td:last-child').each(function (index) {
 												$(this).find('dl').remove();
 												if ($(search).length > 0 && $(this).closest('table').hasClass('liste')) {
 													$(this).remove(); // Dans les listes ne contenant pas de recherche, il ne faut pas supprimer la dernière colonne
 												}
 											});
 										<?php } else { ?>
-											$table.find('th:first-child, td:first-child').each(function(index) {
+											$table.find('th:first-child, td:first-child').each(function (index) {
 												$(this).find('dl').remove();
 												if ($(search).length > 0 && $(this).closest('table').hasClass('liste')) {
 													$(this).remove(); // Dans les listes ne contenant pas de recherche, il ne faut pas supprimer la dernière colonne

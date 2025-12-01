@@ -23,46 +23,56 @@
  *				Put some comments here
  */
 
+/**
+ * Prepare admin pages header
+ *
+ * @return array Array of tabs to show
+ */
 function listincsvAdminPrepareHead()
 {
-    global $langs, $conf;
+	global $langs, $conf;
 
-    $langs->load("listincsv@listincsv");
+	$langs->load("listincsv@listincsv");
 
-    $h = 0;
-    $head = array();
+	$h = 0;
+	$head = array();
 
-    $head[$h][0] = dol_buildpath("/listincsv/admin/listincsv_setup.php", 1);
-    $head[$h][1] = $langs->trans("Parameters");
-    $head[$h][2] = 'settings';
-    $h++;
-    $head[$h][0] = dol_buildpath("/listincsv/admin/listincsv_about.php", 1);
-    $head[$h][1] = $langs->trans("About");
-    $head[$h][2] = 'about';
-    $h++;
+	$head[$h][0] = dol_buildpath("/listincsv/admin/listincsv_setup.php", 1);
+	$head[$h][1] = $langs->trans("Parameters");
+	$head[$h][2] = 'settings';
+	$h++;
+	$head[$h][0] = dol_buildpath("/listincsv/admin/listincsv_about.php", 1);
+	$head[$h][1] = $langs->trans("About");
+	$head[$h][2] = 'about';
+	$h++;
 
-    // Show more tabs from modules
-    // Entries must be declared in modules descriptor with line
-    //$this->tabs = array(
-    //	'entity:+tabname:Title:@listincsv:/listincsv/mypage.php?id=__ID__'
-    //); // to add new tab
-    //$this->tabs = array(
-    //	'entity:-tabname:Title:@listincsv:/listincsv/mypage.php?id=__ID__'
-    //); // to remove a tab
-    complete_head_from_modules($conf, $langs, $object, $head, $h, 'listincsv');
+	// Show more tabs from modules
+	// Entries must be declared in modules descriptor with line
+	//$this->tabs = array(
+	//	'entity:+tabname:Title:@listincsv:/listincsv/mypage.php?id=__ID__'
+	//); // to add new tab
+	//$this->tabs = array(
+	//	'entity:-tabname:Title:@listincsv:/listincsv/mypage.php?id=__ID__'
+	//); // to remove a tab
+	complete_head_from_modules($conf, $langs, $object, $head, $h, 'listincsv');
 
-    return $head;
+	return $head;
 }
 
-function getListInCSVDownloadLink() {
+/**
+ * Get ListInCSV download link with icon
+ *
+ * @return string HTML link with icon for CSV download
+ */
+function getListInCSVDownloadLink()
+{
 
-	$pathtoimg = dol_buildpath('/listincsv/img/listincsv.png',1);
+	$pathtoimg = dol_buildpath('/listincsv/img/listincsv.png', 1);
 	//$pathtoimg = dol_buildpath('/theme/eldy/img/upload.png',1);
 
 	$link = '<a href="#" class="export" style="text-decoration: none;">';
 	$endlink = '</a>';
-	$img = ' <img src="'.$pathtoimg.'" style="vertical-align: middle;" width="20" />';
+	$img = ' <img src="' . $pathtoimg . '" style="vertical-align: middle;" width="20" />';
 
 	return $link . $img . $endlink;
-
 }

@@ -23,9 +23,9 @@
  * 				Put some comments here
  */
 // Dolibarr environment
-$res = @include("../../main.inc.php"); // From htdocs directory
+$res = @include "../../main.inc.php"; // From htdocs directory
 if (! $res) {
-    $res = @include("../../../main.inc.php"); // From "custom" directory
+	$res = @include "../../../main.inc.php"; // From "custom" directory
 }
 
 // Libraries
@@ -37,7 +37,7 @@ $langs->load("listincsv@listincsv");
 
 // Access control
 if (! $user->admin) {
-    accessforbidden();
+	accessforbidden();
 }
 
 // Parameters
@@ -46,30 +46,22 @@ $action = GETPOST('action', 'alpha');
 /*
  * Actions
  */
-if (preg_match('/set_(.*)/',$action,$reg))
-{
+if (preg_match('/set_(.*)/', $action, $reg)) {
 	$code=$reg[1];
-	if (dolibarr_set_const($db, $code, GETPOST($code), 'chaine', 0, '', $conf->entity) > 0)
-	{
+	if (dolibarr_set_const($db, $code, GETPOST($code), 'chaine', 0, '', $conf->entity) > 0) {
 		header("Location: ".$_SERVER["PHP_SELF"]);
 		exit;
-	}
-	else
-	{
+	} else {
 		dol_print_error($db);
 	}
 }
 
-if (preg_match('/del_(.*)/',$action,$reg))
-{
+if (preg_match('/del_(.*)/', $action, $reg)) {
 	$code=$reg[1];
-	if (dolibarr_del_const($db, $code, 0) > 0)
-	{
+	if (dolibarr_del_const($db, $code, 0) > 0) {
 		Header("Location: ".$_SERVER["PHP_SELF"]);
 		exit;
-	}
-	else
-	{
+	} else {
 		dol_print_error($db);
 	}
 }
@@ -82,17 +74,17 @@ llxHeader('', $langs->trans($page_name));
 
 // Subheader
 $linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'
-    . $langs->trans("BackToModuleList") . '</a>';
+	. $langs->trans("BackToModuleList") . '</a>';
 print_fiche_titre($langs->trans($page_name), $linkback);
 
 // Configuration header
 $head = listincsvAdminPrepareHead();
 dol_fiche_head(
-    $head,
-    'settings',
-    $langs->trans("Module104856Name"),
-    0,
-    "listincsv@listincsv"
+	$head,
+	'settings',
+	$langs->trans("Module104856Name"),
+	0,
+	"listincsv@listincsv"
 );
 
 //echo $langs->trans('NoSetupAvailable');
@@ -116,7 +108,7 @@ print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
 print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="set_LISTINCSV_DELETESPACEFROMNUMBER">';
-print $form->selectyesno("LISTINCSV_DELETESPACEFROMNUMBER", getDolGlobalInt('LISTINCSV_DELETESPACEFROMNUMBER'),1);
+print $form->selectyesno("LISTINCSV_DELETESPACEFROMNUMBER", getDolGlobalInt('LISTINCSV_DELETESPACEFROMNUMBER'), 1);
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
 print '</form>';
 print '</td></tr>';

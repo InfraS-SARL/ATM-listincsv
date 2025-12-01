@@ -26,16 +26,16 @@
 
 //if (! defined('NOREQUIREUSER')) define('NOREQUIREUSER','1');	// Not disabled cause need to load personalized language
 //if (! defined('NOREQUIREDB'))   define('NOREQUIREDB','1');
-if (! defined('NOREQUIRESOC'))    define('NOREQUIRESOC','1');
+if (! defined('NOREQUIRESOC'))    define('NOREQUIRESOC', '1');
 //if (! defined('NOREQUIRETRAN')) define('NOREQUIRETRAN','1');	// Not disabled cause need to do translations
-if (! defined('NOCSRFCHECK'))     define('NOCSRFCHECK',1);
-if (! defined('NOTOKENRENEWAL'))  define('NOTOKENRENEWAL',1);
-if (! defined('NOLOGIN'))         define('NOLOGIN',1);
-if (! defined('NOREQUIREMENU'))   define('NOREQUIREMENU',1);
-if (! defined('NOREQUIREHTML'))   define('NOREQUIREHTML',1);
-if (! defined('NOREQUIREAJAX'))   define('NOREQUIREAJAX','1');
+if (! defined('NOCSRFCHECK'))     define('NOCSRFCHECK', 1);
+if (! defined('NOTOKENRENEWAL'))  define('NOTOKENRENEWAL', 1);
+if (! defined('NOLOGIN'))         define('NOLOGIN', 1);
+if (! defined('NOREQUIREMENU'))   define('NOREQUIREMENU', 1);
+if (! defined('NOREQUIREHTML'))   define('NOREQUIREHTML', 1);
+if (! defined('NOREQUIREAJAX'))   define('NOREQUIREAJAX', '1');
 
-session_cache_limiter(FALSE);
+session_cache_limiter(false);
 
 $res=0;
 if (! $res && file_exists("../../main.inc.php")) $res=@include_once '../../main.inc.php';       // to work if your module directory is into a subdir of root htdocs directory
@@ -71,8 +71,8 @@ function exportTableToCSV($table, filename) {
 	tmpRowDelim = String.fromCharCode(0), // null character
 
 	// actual delimiter characters for CSV format
-        colDelim = '"<?php echo getDolGlobalString('EXPORT_CSV_SEPARATOR_TO_USE', ';') ?>"',
-	    rowDelim = '"\r\n"',
+		colDelim = '"<?php echo getDolGlobalString('EXPORT_CSV_SEPARATOR_TO_USE', ';') ?>"',
+		rowDelim = '"\r\n"',
 
 	// Grab text from table into CSV formatted string
 	csv = '\ufeff"' + $rows.map(function(i, row) {
