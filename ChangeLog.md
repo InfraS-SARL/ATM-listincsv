@@ -2,9 +2,8 @@
 
 ## Unreleased
 
-
-
 ## release 1.9
+- FIX : Compatibility Dolibarr 23 - *02/12/2025* - 1.9.6
 - FIX : COMPAT 22 - *02/10/2025* - 1.9.5
 - FIX : Warning Constant INC_FROM_DOLIBARR already defined - *18/08/2025* - 1.9.4
 - FIX : définition d'une valeur par défaut si aucun titre trouvé pour éviter une erreur sur la fonction trim - *14/03/2025* - 1.9.3
