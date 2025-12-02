@@ -48,7 +48,7 @@ class InterfaceListInCSVtrigger
 		$this->db = $db;
 
 		$this->name = preg_replace('/^Interface/i', '', get_class($this));
-		$this->family = "demo";
+		$this->family = "ATM Consulting - CRM";
 		$this->description = "Triggers of this module are empty functions. They have no effect. They are provided for tutorial purpose only.";
 		// 'development', 'experimental', 'dolibarr' or version
 		$this->version = 'development';
