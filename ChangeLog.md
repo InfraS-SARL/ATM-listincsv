@@ -2,8 +2,6 @@
 
 ## Unreleased
 
-
-
 ## release 1.9
 - FIX : Compatibility Dolibarr 23 - *02/12/2025* - 1.9.6
 - FIX : COMPAT 22 - *02/10/2025* - 1.9.5
