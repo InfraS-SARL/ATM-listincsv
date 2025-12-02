@@ -231,6 +231,8 @@ class ActionsListInCSV extends \listincsv\RetroCompatCommonHookActions
 											});
 										<?php } ?>
 
+
+
 										// Suppression de la ligne TOTAL en pied de tableau
 										if (varsFromPHP.conf['LISTINCSV_DONT_REMOVE_TOTAL']) {
 											$table.find('tr.liste_total').remove();
